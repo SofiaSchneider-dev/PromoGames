@@ -15,12 +15,8 @@ const App = () => {
 
   return (
     <div>
-      <MainApp/>
-      // {isLoggedIn ? (
-      //   <MainApp handleLogout={handleLogout} />
-      // ) : (
-      //   <LandingPage handleLogin={handleLogin} />
-      // )}
+      <MainApp />
+
     </div>
   );
 };
