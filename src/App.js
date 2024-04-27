@@ -1,25 +1,26 @@
 import React, { useState } from "react";
-import LandingPage from "./LandingPage";
+// import LandingPage from "./LandingPage";
 import MainApp from "./MainApp";
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
+  // const handleLogin = () => {
+  //   setIsLoggedIn(true);
+  // };
 
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-  };
+  // const handleLogout = () => {
+  //   setIsLoggedIn(false);
+  // };
 
   return (
     <div>
-      {isLoggedIn ? (
-        <MainApp handleLogout={handleLogout} />
-      ) : (
-        <LandingPage handleLogin={handleLogin} />
-      )}
+      <MainApp/>
+      // {isLoggedIn ? (
+      //   <MainApp handleLogout={handleLogout} />
+      // ) : (
+      //   <LandingPage handleLogin={handleLogin} />
+      // )}
     </div>
   );
 };
