@@ -14,10 +14,8 @@ const App = () => {
   // };
 
   return (
-    <div>
-      <MainApp />
 
-    </div>
+      <MainApp />
   );
 };
 
