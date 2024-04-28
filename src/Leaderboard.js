@@ -38,4 +38,3 @@ const LeaderboardAPI = () => {
 };
 
 export default LeaderboardAPI;
-
