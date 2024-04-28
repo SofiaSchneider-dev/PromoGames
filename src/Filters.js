@@ -4,10 +4,12 @@ const Filters = ({ reports, setFilteredReports, query }) => {
   const [motivoOptions, setMotivoOptions] = useState([]);
   const [empleadoOptions, setEmpleadoOptions] = useState([]);
   const [ubicacionOptions, setUbicacionOptions] = useState([]);
+  const [urgenciaOptions, setUrgenciaOptions] = useState([]);
 
   const [motivoFilter, setMotivoFilter] = useState("");
   const [empleadoFilter, setEmpleadoFilter] = useState("");
   const [ubicacionFilter, setUbicacionFilter] = useState("");
+  const [urgenciaFilter, setUrgenciaFilter] = useState("");
 
   useEffect(() => {
     const uniqueMotivoOptions = [
@@ -22,10 +24,15 @@ const Filters = ({ reports, setFilteredReports, query }) => {
       "",
       ...new Set(reports.map((report) => report.ubicacion)),
     ];
+    const uniqueUrgenciaOptions = [
+      "",
+      ...new Set(reports.map((report) => report.urgencia)),
+    ];
 
     setMotivoOptions(uniqueMotivoOptions);
     setEmpleadoOptions(uniqueEmpleadoOptions);
     setUbicacionOptions(uniqueUbicacionOptions);
+    setUrgenciaOptions(uniqueUrgenciaOptions);
   }, [reports]);
 
   useEffect(() => {
@@ -35,6 +42,7 @@ const Filters = ({ reports, setFilteredReports, query }) => {
         report.nombreEmpleado.toLowerCase(),
         report.ubicacion.toLowerCase(),
         report.descripcion.toLowerCase(),
+        report.urgencia,
       ];
       const matchesSearch = searchFields.some((field) =>
         field.includes(query.toLowerCase())
@@ -44,7 +52,8 @@ const Filters = ({ reports, setFilteredReports, query }) => {
         matchesSearch &&
         (motivoFilter === "" || report.motivo === motivoFilter) &&
         (empleadoFilter === "" || report.nombreEmpleado === empleadoFilter) &&
-        (ubicacionFilter === "" || report.ubicacion === ubicacionFilter)
+        (ubicacionFilter === "" || report.ubicacion === ubicacionFilter) &&
+        (urgenciaFilter === "" || report.urgencia === urgenciaFilter)
       );
     });
     setFilteredReports(filtered);
@@ -55,6 +64,7 @@ const Filters = ({ reports, setFilteredReports, query }) => {
     reports,
     query,
     setFilteredReports,
+    urgenciaFilter,
   ]);
 
   const handleMotivoChange = (e) => {
@@ -67,6 +77,10 @@ const Filters = ({ reports, setFilteredReports, query }) => {
 
   const handleUbicacionChange = (e) => {
     setUbicacionFilter(e.target.value);
+  };
+
+  const handleUrgenciaChange = (e) => {
+    setUrgenciaFilter(e.target.value);
   };
 
   return (
@@ -105,9 +119,21 @@ const Filters = ({ reports, setFilteredReports, query }) => {
             </option>
           ))}
         </select>
+        <select
+          className="filter-dropdown"
+          value={urgenciaFilter}
+          onChange={handleUrgenciaChange}
+        >
+          {urgenciaOptions.map((urgencia) => (
+            <option key={urgencia} value={urgencia}>
+              {urgencia || "Urgencia"}
+            </option>
+          ))}
+        </select>
       </div>
     </div>
   );
 };
 
 export default Filters;
+
