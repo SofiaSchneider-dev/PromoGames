@@ -11,7 +11,7 @@ const LeaderboardAPI = () => {
   const fetchLeaderboardData = async () => {
     try {
       const response = await fetch(
-        "http://208.94.246.53:8080/api/getEmpleados"
+        "http://192.52.242.230:8080/api/getEmpleados"
       );
       const data = await response.json();
       setLeaderboardData(data.recordset);
@@ -38,3 +38,4 @@ const LeaderboardAPI = () => {
 };
 
 export default LeaderboardAPI;
+
