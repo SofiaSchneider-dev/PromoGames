@@ -51,6 +51,7 @@ const LandingPage = ({ handleLogin }) => {
         } else {
           setSuccess("Login successful!");
           handleLogin();
+          localStorage.setItem("isLoggedIn", JSON.stringify(true));
         }
       }
     } catch (error) {
