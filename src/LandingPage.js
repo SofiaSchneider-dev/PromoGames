@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./index.css";
+import whirlLogo from "./whirlLogo.png";
 
 const LandingPage = ({ handleLogin }) => {
   const [email, setEmail] = useState("");
@@ -66,6 +67,7 @@ const LandingPage = ({ handleLogin }) => {
 
   return (
     <div className="landing-page">
+      <img src={whirlLogo} alt="Whirlpool Logo" />
       <div className="landing-page-container">
         <h1>PromoGames Reportes</h1>
         {error && <div className="error">{error}</div>}
