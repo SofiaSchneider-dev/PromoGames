@@ -5,7 +5,7 @@ import ImageClassifier from "./ImageRecognition";
 
 import "./index.css";
 
-export default function MainApp() {
+export default function MainApp({ handleLogout }) {
   const [query, setQuery] = useState("");
   const [selectedReport, setSelectedReport] = useState(null);
 
@@ -57,6 +57,7 @@ export default function MainApp() {
         <Logo />
         <Search query={query} setQuery={setQuery} />
         <Numresults numResults={filteredReports.length} />
+        <LogoutButton handleLogout={handleLogout} />
       </NavBar>
       <Filters
         reports={reports}
@@ -139,6 +140,20 @@ export default function MainApp() {
     return <main className="main">{children}</main>;
   }
 
+  function LogoutButton({ handleLogout }) {
+    return (
+      <button
+        className="logout-btn"
+        onClick={() => {
+          handleLogout();
+          localStorage.removeItem("isLoggedIn");
+        }}
+      >
+        Logout
+      </button>
+    );
+  }
+
   function ReportDetails({ report, onBackClick }) {
     if (!report) {
       return (
@@ -178,9 +193,10 @@ export default function MainApp() {
             </p>
           </div>
           {imageUrl && <img src={imageUrl} alt={report.motivo} />}
-          {imageUrl && <p>image recognition...</p>}{" "}
+          {imageUrl && <p>image recognition</p>}{" "}
         </div>
       </div>
     );
   }
 }
+
