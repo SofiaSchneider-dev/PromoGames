@@ -178,7 +178,7 @@ export default function MainApp() {
             </p>
           </div>
           {imageUrl && <img src={imageUrl} alt={report.motivo} />}
-          {imageUrl && <p>image recognition</p>}{" "}
+          {imageUrl && <p>image recognition...</p>}{" "}
         </div>
       </div>
     );
