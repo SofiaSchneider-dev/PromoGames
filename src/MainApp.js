@@ -26,7 +26,9 @@ export default function MainApp() {
 
   const fetchReports = async () => {
     try {
-      const response = await fetch("http://208.94.246.53:8080/api/getReportes");
+      const response = await fetch(
+        "http://192.52.242.230:8080/api/getReportes"
+      );
       console.log(response);
       const data = await response.json();
       setReports(data.recordset);
@@ -108,43 +110,6 @@ export default function MainApp() {
     );
   }
 
-  // function ReportDetails({ report, onBackClick }) {
-  //   if (!report) {
-  //     return (
-  //       <div className="box">
-  //         <LeaderboardAPI />
-  //       </div>
-  //     );
-  //   }
-
-  //   const dateObject = new Date(report.fechageneracion);
-
-  //   const formattedDate = dateObject.toISOString().split("T")[0];
-
-  //   return (
-  //     <div className="box">
-  //       <button className="btn-back" onClick={onBackClick}>
-  //         &larr;
-  //       </button>
-  //       <div className="details">
-  //         <div className="details-overview">
-  //           <h2>{report.motivo}</h2>
-  //           <p>{formattedDate}</p>
-  //           <p>
-  //             <span role="img">📍</span>
-  //             {report.ubicacion}
-  //           </p>
-  //           <p>
-  //             Reportado por: <strong>{report.nombreEmpleado}</strong>
-  //           </p>
-  //           <p>{report.descripcion}</p>
-  //         </div>
-  //         <img src={report.link} alt={report.motivo} />
-  //       </div>
-  //     </div>
-  //   );
-  // }
-
   function ReportDetails({ report, onBackClick }) {
     if (!report) {
       return (
@@ -158,7 +123,7 @@ export default function MainApp() {
     const formattedDate = dateObject.toISOString().split("T")[0];
     const imageUrl =
       report.link !== null && report.link !== undefined
-        ? `http://208.94.246.53:8080/images/${report.link.trim()}`
+        ? `http://192.52.242.230:8080/images/${report.link.trim()}`
         : null;
 
     return (
@@ -178,198 +143,16 @@ export default function MainApp() {
               Reportado por: <strong>{report.nombreEmpleado}</strong>
             </p>
             <p>{report.descripcion}</p>
+            <p>
+              <strong>Urgencia:</strong>
+              {report.urgencia}
+            </p>
           </div>
           {imageUrl && <img src={imageUrl} alt={report.motivo} />}
         </div>
       </div>
     );
   }
-
-  // function ReportDetails({ report, onBackClick }) {
-  //   if (!report) {
-  //     return (
-  //       <div className="box">
-  //         <LeaderboardAPI />
-  //       </div>
-  //     );
-  //   }
-
-  //   const dateObject = new Date(report.fechageneracion);
-  //   const formattedDate = dateObject.toISOString().split("T")[0];
-  //   const imageUrl = `http://208.94.246.53:8080/images/${report.link.trim()}`;
-
-  //   return (
-  //     <div className="box">
-  //       <button className="btn-back" onClick={onBackClick}>
-  //         &larr;
-  //       </button>
-  //       <div className="details">
-  //         <div className="details-overview">
-  //           <h2>{report.motivo}</h2>
-  //           <p>{formattedDate}</p>
-  //           <p>
-  //             <span role="img">📍</span>
-  //             {report.ubicacion}
-  //           </p>
-  //           <p>
-  //             Reportado por: <strong>{report.nombreEmpleado}</strong>
-  //           </p>
-  //           <p>{report.descripcion}</p>
-  //         </div>
-  //         <img src={imageUrl} alt={report.descripcion} />
-  //       </div>
-  //     </div>
-  //   );
-  // }
-
-  // function ReportDetails({ report, onBackClick }) {
-  //   if (!report) {
-  //     return (
-  //       <div className="box">
-  //         <LeaderboardAPI />
-  //       </div>
-  //     );
-  //   }
-
-  //   const dateObject = new Date(report.fechageneracion);
-  //   const imageUrl = `http://208.94.246.53:8080/images/${report.link}`;
-  //   const formattedDate = dateObject.toISOString().split("T")[0];
-
-  //   return (
-  //     <div className="box">
-  //       <button className="btn-back" onClick={onBackClick}>
-  //         &larr;
-  //       </button>
-  //       <div className="details">
-  //         <div className="details-overview">
-  //           <h2>{report.motivo}</h2>
-  //           <p>{formattedDate}</p>
-  //           <p>
-  //             <span role="img">📍</span>
-  //             {report.ubicacion}
-  //           </p>
-  //           <p>
-  //             Reportado por: <strong>{report.nombreEmpleado}</strong>
-  //           </p>
-  //           <p>{report.descripcion}</p>
-  //         </div>
-  //         <img src={imageUrl} alt={report.motivo} />
-  //       </div>
-  //     </div>
-  //   );
-  // }
-  // function ReportDetails({ report, onBackClick }) {
-  //   const [imageData, setImageData] = useState(null);
-
-  //   const blobToBase64 = (blob) =>
-  //     new Promise((resolve, reject) => {
-  //       const reader = new FileReader();
-  //       reader.onload = () => resolve(reader.result.split(",")[1]);
-  //       reader.onerror = reject;
-  //       reader.readAsDataURL(blob);
-  //     });
-
-  //   useEffect(() => {
-  //     const fetchImageData = async () => {
-  //       if (report) {
-  //         const imageUrl = `http://208.94.246.53:8080/images/${report.link}`;
-  //         try {
-  //           const response = await fetch(imageUrl);
-  //           const blob = await response.blob();
-  //           const base64Data = await blobToBase64(blob);
-  //           setImageData(base64Data);
-  //         } catch (error) {
-  //           console.error("Error fetching image data:", error);
-  //         }
-  //       }
-  //     };
-
-  //     fetchImageData();
-  //   }, [report]);
-
-  //   if (!report) {
-  //     return (
-  //       <div className="box">
-  //         <LeaderboardAPI />
-  //       </div>
-  //     );
-  //   }
-
-  //   const dateObject = new Date(report.fechageneracion);
-  //   const formattedDate = dateObject.toISOString().split("T")[0];
-
-  //   return (
-  //     <div className="box">
-  //       <button className="btn-back" onClick={onBackClick}>
-  //         &larr;
-  //       </button>
-  //       <div className="details">
-  //         <div className="details-overview">
-  //           <h2>{report.motivo}</h2>
-  //           <p>{formattedDate}</p>
-  //           <p>
-  //             <span role="img">📍</span>
-  //             {report.ubicacion}
-  //           </p>
-  //           <p>
-  //             Reportado por: <strong>{report.nombreEmpleado}</strong>
-  //           </p>
-  //           <p>{report.descripcion}</p>
-  //         </div>
-  //         {imageData ? (
-  //           <img src={imageUrl} alt={report.motivo} />
-  //         ) : (
-  //           <p>Loading image...</p>
-  //         )}
-  //       </div>
-  //     </div>
-  //   );
-  // }
-
-  // function ReportDetails({ report, onBackClick }) {
-  //   const [imageUrl, setImageUrl] = useState(null);
-
-  //   useEffect(() => {
-  //     if (report) {
-  //       const imageUrl = `http://208.94.246.53:8080/images/${report.link}`;
-  //       setImageUrl(imageUrl);
-  //     }
-  //   }, [report]);
-
-  //   if (!report) {
-  //     return (
-  //       <div className="box">
-  //         <LeaderboardAPI />
-  //       </div>
-  //     );
-  //   }
-
-  //   const dateObject = new Date(report.fechageneracion);
-  //   const formattedDate = dateObject.toISOString().split("T")[0];
-
-  //   return (
-  //     <div className="box">
-  //       <button className="btn-back" onClick={onBackClick}>
-  //         &larr;
-  //       </button>
-  //       <div className="details">
-  //         <div className="details-overview">
-  //           <h2>{report.motivo}</h2>
-  //           <p>{formattedDate}</p>
-  //           <p>
-  //             <span role="img">📍</span>
-  //             {report.ubicacion}
-  //           </p>
-  //           <p>
-  //             Reportado por: <strong>{report.nombreEmpleado}</strong>
-  //           </p>
-  //           <p>{report.descripcion}</p>
-  //         </div>
-  //         {imageUrl && <img src={imageUrl} alt={report.motivo} />}
-  //       </div>
-  //     </div>
-  //   );
-  // }
 
   function Search({ query, setQuery }) {
     const handleChange = (e) => {
@@ -400,3 +183,4 @@ export default function MainApp() {
     return <main className="main">{children}</main>;
   }
 }
+
