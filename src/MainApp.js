@@ -1,7 +1,7 @@
-import { useState, useEffect, useCallback } from "react";
-import Img from "react-image";
+import { useState, useEffect, useRef } from "react";
 import LeaderboardAPI from "./Leaderboard";
 import Filters from "./Filters";
+import ImageClassifier from "./ImageRecognition";
 
 import "./index.css";
 
@@ -110,6 +110,35 @@ export default function MainApp() {
     );
   }
 
+  function Search({ query, setQuery }) {
+    const handleChange = (e) => {
+      setQuery(e.target.value);
+    };
+
+    return (
+      <input
+        className="search"
+        type="text"
+        placeholder="Buscar reporte..."
+        value={query}
+        onChange={handleChange}
+        autoFocus
+      />
+    );
+  }
+
+  function Numresults({ numResults }) {
+    return (
+      <p className="num-results">
+        <strong>{numResults}</strong> resultados encontrados
+      </p>
+    );
+  }
+
+  function Main({ children }) {
+    return <main className="main">{children}</main>;
+  }
+
   function ReportDetails({ report, onBackClick }) {
     if (!report) {
       return (
@@ -149,38 +178,9 @@ export default function MainApp() {
             </p>
           </div>
           {imageUrl && <img src={imageUrl} alt={report.motivo} />}
+          {imageUrl && <p>image recognition</p>}{" "}
         </div>
       </div>
     );
   }
-
-  function Search({ query, setQuery }) {
-    const handleChange = (e) => {
-      setQuery(e.target.value);
-    };
-
-    return (
-      <input
-        className="search"
-        type="text"
-        placeholder="Buscar reporte..."
-        value={query}
-        onChange={handleChange}
-        autoFocus
-      />
-    );
-  }
-
-  function Numresults({ numResults }) {
-    return (
-      <p className="num-results">
-        <strong>{numResults}</strong> resultados encontrados
-      </p>
-    );
-  }
-
-  function Main({ children }) {
-    return <main className="main">{children}</main>;
-  }
 }
-
